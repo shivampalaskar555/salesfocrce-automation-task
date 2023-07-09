@@ -36,7 +36,7 @@ public class VisitCreation {
 	@FindBy(xpath="//div[contains(text(),'New Visit')]")WebElement new_visit;
 //	@FindBy(xpath="//tr[@id='sirenumRow_*']/td[2]/div[2]")WebElement Sourcelocator;
 	@FindBy(xpath="(//div[@class='staffShift'])[2]")WebElement Sourcelocator;
-	
+//	@FindBy(xpath="//tr[@id='sirenumRow_*']/td[2]/div[2]")WebElement Sourcelocator;
 	@FindBy(xpath="(//tr[@rownum='17']/td)[2]")WebElement Destinationlocator;
 	@FindBy(xpath="//div[@class='sirenumFormElement'][4]//input")WebElement SelectProject;
 	@FindBy(xpath="//div[@class='sirenumFormElement'][6]//input")WebElement VisitType;
@@ -50,11 +50,7 @@ public class VisitCreation {
 	@FindBy(xpath="//a[@class='profile-link-label logout uiOutputURL']")WebElement Logout ;
 	
 	@FindBy(xpath="//tr[@id='sirenumHeaderRow']")WebElement scale ;
-	
-	
-	
-	
-	
+
 	
 public VisitCreation(WebDriver driver) {
 	PageFactory.initElements(driver, this);
@@ -119,8 +115,7 @@ public void VisitCreations() throws InterruptedException, CsvValidationException
 			act1.moveToElement(pqr).contextClick().build().perform();
 			new_visit.click();
 			break;
-	   }
-	   
+	   }   
    }
    
 //   String Date1= scale.getText();
@@ -220,8 +215,6 @@ public void VisitCreations() throws InterruptedException, CsvValidationException
 //	TopSave.click();
 //	Thread.sleep(5000);
 //    driver.quit();
-
-
 
 }	
 }
