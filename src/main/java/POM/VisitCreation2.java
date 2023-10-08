@@ -25,7 +25,7 @@ import com.opencsv.exceptions.CsvValidationException;
 
 import utility.Wait;
 
-public class VisitCreation {
+public class VisitCreation2 {
 	WebDriver driver;
 	@FindBy(xpath="//input[@class='input r4 wide mb16 mt8 username']")WebElement username_click;
 	@FindBy(xpath="//input[@class='input r4 wide mb16 mt8 password']")WebElement password_click;
@@ -134,110 +134,129 @@ public class VisitCreation {
    
     ///we need to delete all the sites then do the operation
     
-public VisitCreation(WebDriver driver) {
+public VisitCreation2(WebDriver driver) {
 	PageFactory.initElements(driver, this);
 	this.driver=driver;
 	
 }
-
-public void VisitCreations() throws InterruptedException, CsvValidationException, IOException
-{
-
-	String trim=driver.getCurrentUrl();
-	pick.assertEquals(trim,url);
-	pick.assertAll();
-	Wait.explicitWait_clickAction(driver, ClickOnDots);
-	Wait.explicitWait_clickAction(driver, SearchButton);
-	Wait.explicitWait_sendkAction(driver, SearchButton, "Illingworth");
-	SearchButton.sendKeys(Keys.ENTER);
-	Thread.sleep(10000);
-	Wait.explicitWait_clickAction(driver, MainSchedule_click);	
-    Thread.sleep(20000);
-    driver.switchTo().frame(Iframe);
-	Thread.sleep(6000);
-	String CSV2 = "C:\\Users\\areya\\Downloads\\Salesforcetasksh (1)\\Salesforcetask\\Date.csv";
-	CSVReader reader2 = new CSVReader(new FileReader(CSV2));
-    String[] cell2;
-    while((cell2=reader2.readNext())!=null) 
-	{ 
-		   for(int i=0; i<1 ; i++)
+	public void LoginDeal() throws CsvValidationException, IOException, InterruptedException {
+		String CSV = "C:\\Users\\areya\\Downloads\\Salesforcetasksh (1)\\Salesforcetask\\Credentials.csv";
+		CSVReader reader = new CSVReader(new FileReader(CSV));
+	    String[] cell;
+	    while((cell=reader.readNext())!=null) 
 		{ 
-			Day3    =cell2[i];
-		    latestDate =cell2[i+1];
-	    }
-	}	   
-   String ppp = Day3+","+latestDate ;
-   Thread.sleep(3000);
-   String Date= scale.getText();
-   if(Date.contains(ppp))
-   {System.out.println(ppp);}
-   else {
-	   next_click.click();
-	   Thread.sleep(10000);
-   }
-   List<WebElement> xyz=driver.findElements(By.xpath("//table//tr//th[@id='sirenumStatus']/following-sibling::th"));
-   System.out.println(xyz.size());  
-   for (int i=1; i<=xyz.size(); i++)
-   {
-	   Thread.sleep(2000);
-	   String Text =driver.findElement(By.xpath("(//table//tr//th[@id='sirenumStatus']/following-sibling::th)["+i+"]")).getText();
-	   System.out.println(Text);
-	   System.out.println(i);
-	   if(Text.equalsIgnoreCase(ppp))
-	   {
-		   System.out.println(Text);
-		   WebElement dad=driver.findElement(By.xpath("(//tr[@id='sirenumRow_*']/td)["+(i+1)+"]"));
-		   Actions act1 = new Actions(driver);
-		   act1.moveToElement(dad).contextClick().build().perform();
-		   new_visit.click();
-		   String CSV1 = "C:\\Users\\areya\\Downloads\\Salesforcetasksh (1)\\Salesforcetask\\Visitdetails.csv";
-		   CSVReader reader1 = new CSVReader(new FileReader(CSV1));
-		   String[] cell1;
-		   while((cell1=reader1.readNext())!=null)  // check for file should have the data
-			{ 
-				   for(int j=0; j<1 ; j++)
-				{
-				   String selectproject = cell1[j];
-				   String visittype = cell1[j+1];
-				   String visitnumber = cell1[j+2];
-				   String noofParticipants = cell1[j+3];
-				   String location = cell1[j+4];
-			
-				SelectProject.sendKeys(selectproject);
-		    	Thread.sleep(4000);
-		    	SelectProject.sendKeys(Keys.ENTER);
-		      	Thread.sleep(4000);
-		      	VisitType.sendKeys(visittype);
-		    	Thread.sleep(5000);
-		    	VisitType.sendKeys(Keys.ENTER);
-		    	VisitNumber.sendKeys(visitnumber);
-		    	VisitType.sendKeys(Keys.TAB);
-		    	Thread.sleep(4000);
-		    	Participant.sendKeys(noofParticipants);
-		    	Thread.sleep(4000);
-		    	Participant.sendKeys(Keys.ENTER);
-		    	ParticipantLocation.sendKeys(location);
-		    	Thread.sleep(3000);
-		    	ParticipantLocation.sendKeys(Keys.ENTER);
-		    	Thread.sleep(10000);
-		    
-		    	JavascriptExecutor j32= (JavascriptExecutor) driver;
-		    	j32.executeScript("arguments[0].click();", FormSave);
-		    	Thread.sleep(30000);
-				}
+			   for(int i=0; i<1 ; i++)
+			{
+			    username = cell[i];
+			    password = cell[i+1];
 			}
-		    List <WebElement> boss = driver.findElements(By.xpath("(//tr[@id='sirenumRow_*']/td)["+(i+1)+"]/child::div"));
-			Thread.sleep(5000);
-		    System.out.println(boss.size());  
-			WebElement Drag=driver.findElement(By.xpath("(//tr[@id='sirenumRow_*']/td)["+(i+1)+"]/child::div["+boss.size()+"]"));
-		    WebElement Drop = driver.findElement(By.xpath("(//div//a[contains(text(),'Test Ranjitha')]/parent::div/parent::div/parent::td/following-sibling::td)["+i+"]"));  
-		    act1.dragAndDrop(Drag,Drop).build().perform();
-		    break;
-	   }   
-   }
-	Thread.sleep(2000);
-	TopSave.click();
-}
+		}
+	    username_click.sendKeys(username);
+	    Thread.sleep(2000);
+	    password_click.sendKeys(password);
+		Thread.sleep(2000);
+		loginbtn_click.click();
+		Thread.sleep(10000);
+	}
+//
+//public void VisitCreations() throws InterruptedException, CsvValidationException, IOException
+//{
+//
+//	String trim=driver.getCurrentUrl();
+//	pick.assertEquals(trim,url);
+//	pick.assertAll();
+//	Wait.explicitWait_clickAction(driver, ClickOnDots);
+//	Wait.explicitWait_clickAction(driver, SearchButton);
+//	Wait.explicitWait_sendkAction(driver, SearchButton, "Illingworth");
+//	SearchButton.sendKeys(Keys.ENTER);
+//	Thread.sleep(10000);
+//	Wait.explicitWait_clickAction(driver, MainSchedule_click);	
+//    Thread.sleep(20000);
+//    driver.switchTo().frame(Iframe);
+//	Thread.sleep(6000);
+//	String CSV2 = "C:\\Users\\areya\\Downloads\\Salesforcetasksh (1)\\Salesforcetask\\Date.csv";
+//	CSVReader reader2 = new CSVReader(new FileReader(CSV2));
+//    String[] cell2;
+//    while((cell2=reader2.readNext())!=null) 
+//	{ 
+//		   for(int i=0; i<1 ; i++)
+//		{ 
+//			Day3    =cell2[i];
+//		    latestDate =cell2[i+1];
+//	    }
+//	}	   
+//   String ppp = Day3+","+latestDate ;
+//   Thread.sleep(3000);
+//   String Date= scale.getText();
+//   if(Date.contains(ppp))
+//   {System.out.println(ppp);}
+//   else {
+//	   next_click.click();
+//	   Thread.sleep(10000);
+//   }
+//   List<WebElement> xyz=driver.findElements(By.xpath("//table//tr//th[@id='sirenumStatus']/following-sibling::th"));
+//   System.out.println(xyz.size());  
+//   for (int i=1; i<=xyz.size(); i++)
+//   {
+//	   Thread.sleep(2000);
+//	   String Text =driver.findElement(By.xpath("(//table//tr//th[@id='sirenumStatus']/following-sibling::th)["+i+"]")).getText();
+//	   System.out.println(Text);
+//	   System.out.println(i);
+//	   if(Text.equalsIgnoreCase(ppp))
+//	   {
+//		   System.out.println(Text);
+//		   WebElement dad=driver.findElement(By.xpath("(//tr[@id='sirenumRow_*']/td)["+(i+1)+"]"));
+//		   Actions act1 = new Actions(driver);
+//		   act1.moveToElement(dad).contextClick().build().perform();
+//		   new_visit.click();
+//		   String CSV1 = "C:\\Users\\areya\\Downloads\\Salesforcetasksh (1)\\Salesforcetask\\Visitdetails.csv";
+//		   CSVReader reader1 = new CSVReader(new FileReader(CSV1));
+//		   String[] cell1;
+//		   while((cell1=reader1.readNext())!=null)  // check for file should have the data
+//			{ 
+//				   for(int j=0; j<1 ; j++)
+//				{
+//				   String selectproject = cell1[j];
+//				   String visittype = cell1[j+1];
+//				   String visitnumber = cell1[j+2];
+//				   String noofParticipants = cell1[j+3];
+//				   String location = cell1[j+4];
+//			
+//				SelectProject.sendKeys(selectproject);
+//		    	Thread.sleep(4000);
+//		    	SelectProject.sendKeys(Keys.ENTER);
+//		      	Thread.sleep(4000);
+//		      	VisitType.sendKeys(visittype);
+//		    	Thread.sleep(5000);
+//		    	VisitType.sendKeys(Keys.ENTER);
+//		    	VisitNumber.sendKeys(visitnumber);
+//		    	VisitType.sendKeys(Keys.TAB);
+//		    	Thread.sleep(4000);
+//		    	Participant.sendKeys(noofParticipants);
+//		    	Thread.sleep(4000);
+//		    	Participant.sendKeys(Keys.ENTER);
+//		    	ParticipantLocation.sendKeys(location);
+//		    	Thread.sleep(3000);
+//		    	ParticipantLocation.sendKeys(Keys.ENTER);
+//		    	Thread.sleep(10000);
+//		    
+//		    	JavascriptExecutor j32= (JavascriptExecutor) driver;
+//		    	j32.executeScript("arguments[0].click();", FormSave);
+//		    	Thread.sleep(30000);
+//				}
+//			}
+//		    List <WebElement> boss = driver.findElements(By.xpath("(//tr[@id='sirenumRow_*']/td)["+(i+1)+"]/child::div"));
+//			Thread.sleep(5000);
+//		    System.out.println(boss.size());  
+//			WebElement Drag=driver.findElement(By.xpath("(//tr[@id='sirenumRow_*']/td)["+(i+1)+"]/child::div["+boss.size()+"]"));
+//		    WebElement Drop = driver.findElement(By.xpath("(//div//a[contains(text(),'Test Ranjitha')]/parent::div/parent::div/parent::td/following-sibling::td)["+i+"]"));  
+//		    act1.dragAndDrop(Drag,Drop).build().perform();
+//		    break;
+//	   }   
+//   }
+//	Thread.sleep(2000);
+//	TopSave.click();
+//}
 //public void ProjectTeamRecordCreation() throws InterruptedException {
 //	
 //	Wait.explicitWait_clickAction(driver, ClickOnDots);
